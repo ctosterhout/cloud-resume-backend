@@ -21,8 +21,7 @@ create-json-config:
 
 integration-test:
 	DOMAIN_NAME=$$(cat config.json | jq .DOMAIN_NAME -r); \
-	FIRST=$$(curl -s "https://api.$$DOMAIN_NAME/get" | jq ".count| tonumber"); \
-	curl -s "https://api.$$DOMAIN_NAME/put"; \
+	FIRST=$$(curl -s "https://f4g6yn5zlj.execute-api.us-east-1.amazonaws.com/Prod/counter" | jq ".count| tonumber"); 
 	SECOND=$$(curl -s "https://f4g6yn5zlj.execute-api.us-east-1.amazonaws.com/Prod/counter" | jq ".count| tonumber"); \
 	echo "Comparing if first count ($$FIRST) is less than (<) second count ($$SECOND)"; \
 	if [[ $$FIRST -le $$SECOND ]]; then echo "PASS"; else echo "FAIL";  fi
