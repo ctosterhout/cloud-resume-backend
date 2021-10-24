@@ -18,8 +18,7 @@ jobs:
           aws-region: us-east-1
       - name: Open Directory
         run: |
-         ls -la
+         pwd
       - run: sam build
-        working-directory: cloud-resume-backend
       - run: sam deploy --no-confirm-changeset --no-fail-on-empty-changeset
-        working-directory: cloud-resume-backend
+
