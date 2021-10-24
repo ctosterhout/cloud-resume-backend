@@ -6,7 +6,7 @@ const sleep = async (r) => await new Promise(r => setTimeout(r, 2000));
 (async () => {
     const browser = await puppeteer.launch();
     const page = await browser.newPage();
-    const website = `http://website.${DOMAIN_NAME}`
+    const website = `http://myresume.${DOMAIN_NAME}`
     console.log(`Loading: ${website}`)
     await page.goto(website)
     console.log(`Waiting for API calls to be made`)
