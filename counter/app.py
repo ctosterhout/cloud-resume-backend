@@ -8,7 +8,7 @@ dynamodb = boto3.resource('dynamodb')
 # ddbTableName = os.environ['databaseName']
 ddbTableName = 'cloud-resume-counter'
 table = dynamodb.Table(ddbTableName)
-
+ddbResponse = None
 
 def lambda_handler(event, context):
     #Update item in table or add if doesn't exist
@@ -23,13 +23,15 @@ def lambda_handler(event, context):
             },
             ReturnValues="UPDATED_NEW"
         )
+        # Format dynamodb response into variable
+        responseBody = json.dumps({'count': int(ddbResponse["Attributes"]["visitor_count"])})
     except:
         table.put_item(Item={'id':'count','visitor_count':1})
+        responseBody = json.dumps({'count': 1)
  
 
 
-    # Format dynamodb response into variable
-    responseBody = json.dumps({'count': int(ddbResponse["Attributes"]["visitor_count"])})
+   
 
 
     print(responseBody)
